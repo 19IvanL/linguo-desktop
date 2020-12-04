@@ -8,10 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import ams2.linguo.controller.LanguageParser;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import java.awt.FlowLayout;
@@ -64,7 +67,11 @@ public class CourseAdministrator extends JFrame {
 		JLabel lblIdiomaDeOrigen = new JLabel("Idioma de origen");
 		panel_1.add(lblIdiomaDeOrigen);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		LanguageParser languageParser = new LanguageParser();
+		List<String> languageList = languageParser.getLanguageList();
+		String[] languageArray = languageList.toArray(new String[languageList.size()]);
+		
+		JComboBox<String> comboBox = new JComboBox<String>(languageArray);
 		panel_1.add(comboBox);
 		
 		JPanel panel_2 = new JPanel();
@@ -75,7 +82,7 @@ public class CourseAdministrator extends JFrame {
 		JLabel lblIdiomaDeDestino = new JLabel("Idioma de destino");
 		panel_2.add(lblIdiomaDeDestino);
 		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		JComboBox<String> comboBox_1 = new JComboBox<String>(languageArray);
 		panel_2.add(comboBox_1);
 		
 		JPanel panel_3 = new JPanel();
