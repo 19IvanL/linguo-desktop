@@ -13,17 +13,17 @@ import org.json.simple.parser.ParseException;
 
 public class LanguageParser {
 
-	private List<String> languageList;
-
+	private List<Language> languageList;
+	
 	public LanguageParser() {
 		parseLanguageFile();
 	}
 
-	public List<String> getLanguageList() {
+	public List<Language> getLanguageList() {
 		return languageList;
 	}
 
-	public void setLanguageList(List<String> languageList) {
+	public void setLanguageList(List<Language> languageList) {
 		this.languageList = languageList;
 	}
 
@@ -40,15 +40,23 @@ public class LanguageParser {
             JSONArray bindings = (JSONArray)results.get("bindings");
             
             // Initialize languageList
-            languageList = new ArrayList<String>();
+            languageList = new ArrayList<Language>();
             
-            // Loop through every binding
+            // Loop through every binding and save values
             for (int i = 0; i < bindings.size(); i++) {
-            	JSONObject objects = (JSONObject) bindings.get(i);
-            	JSONObject idioma = (JSONObject)objects.get("idioma");
-            	String value = (String)idioma.get("value");
-            	value = value.substring(7).substring(0, 1).toUpperCase() + value.substring(8);
-            	languageList.add(value);
+            	JSONObject objects = (JSONObject)bindings.get(i);
+            	
+            	Language language = new Language();
+            	
+            	JSONObject languageName = (JSONObject)objects.get("languageName");
+            	String languageNameValue = (String)languageName.get("value");
+            	language.setName(languageNameValue);
+            	
+            	JSONObject isoCode = (JSONObject)objects.get("isoCode");
+            	String isoCodeValue = (String)isoCode.get("value");
+            	language.setIsoCode(isoCodeValue);
+            	
+            	languageList.add(language);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -58,5 +66,7 @@ public class LanguageParser {
 			e.printStackTrace();
 		}
 	}
+
+	
 
 }

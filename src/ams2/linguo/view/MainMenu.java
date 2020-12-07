@@ -10,9 +10,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.Toolkit;
 
 public class MainMenu extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6480680643448385087L;
 
 	private JPanel contentPane;
 
