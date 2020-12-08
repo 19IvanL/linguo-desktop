@@ -7,6 +7,7 @@
     { "languageName": { "type": "literal", "value": "Alban\u00E9s" }	, "isoCode": { "type": "literal", "value": "SQ" }},
     { "languageName": { "type": "literal", "value": "Alem\u00E1n" }	, "isoCode": { "type": "literal", "value": "DE" }},
     { "languageName": { "type": "literal", "value": "Amh\u00E1rico" }	, "isoCode": { "type": "literal", "value": "AM" }},
+    { "languageName": { "type": "literal", "value": "\u00C1rabe" }	, "isoCode": { "type": "literal", "value": "AR" }},
     { "languageName": { "type": "literal", "value": "Aragon\u00E9s" }	, "isoCode": { "type": "literal", "value": "AN" }},
     { "languageName": { "type": "literal", "value": "Armenio" }	, "isoCode": { "type": "literal", "value": "HY" }},
     { "languageName": { "type": "literal", "value": "Avar" }	, "isoCode": { "type": "literal", "value": "AV" }},
@@ -70,6 +71,7 @@
     { "languageName": { "type": "literal", "value": "Past\u00FAn" }	, "isoCode": { "type": "literal", "value": "PS" }},
     { "languageName": { "type": "literal", "value": "Persa" }	, "isoCode": { "type": "literal", "value": "FA" }},
     { "languageName": { "type": "literal", "value": "Polaco" }	, "isoCode": { "type": "literal", "value": "PL" }},
+    { "languageName": { "type": "literal", "value": "Portugu\u00E9s" }	, "isoCode": { "type": "literal", "value": "PT" }},
     { "languageName": { "type": "literal", "value": "Rumano" }	, "isoCode": { "type": "literal", "value": "RO" }},
     { "languageName": { "type": "literal", "value": "Ruso" }	, "isoCode": { "type": "literal", "value": "RU" }},
     { "languageName": { "type": "literal", "value": "Sardo" }	, "isoCode": { "type": "literal", "value": "SC" }},
@@ -87,5 +89,4 @@
     { "languageName": { "type": "literal", "value": "Ucraniano" }	, "isoCode": { "type": "literal", "value": "UK" }},
     { "languageName": { "type": "literal", "value": "Uzbeko" }	, "isoCode": { "type": "literal", "value": "UZ" }},
     { "languageName": { "type": "literal", "value": "Venda" }	, "isoCode": { "type": "literal", "value": "VE" }},
-    { "languageName": { "type": "literal", "value": "Vietnamita" }	, "isoCode": { "type": "literal", "value": "VI" }},
-    { "languageName": { "type": "literal", "value": "\u00C1rabe" }	, "isoCode": { "type": "literal", "value": "AR" }} ] } }
+    { "languageName": { "type": "literal", "value": "Vietnamita" }	, "isoCode": { "type": "literal", "value": "VI" }} ] } }

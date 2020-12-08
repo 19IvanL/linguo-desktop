@@ -1,7 +1,6 @@
 package ams2.linguo.view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,14 +17,19 @@ import ams2.linguo.controller.LanguageListCellRenderer;
 import ams2.linguo.controller.LanguageParser;
 import ams2.linguo.controller.LessonListCellRenderer;
 import ams2.linguo.controller.LessonListModel;
+import ams2.linguo.interfaces.ICourseQueries;
 import ams2.linguo.model.Course;
 import ams2.linguo.model.Lesson;
+import ams2.linguo.queries.CourseQueries;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -38,6 +42,9 @@ public class CourseAdministrator extends JFrame {
 
 	private static final long serialVersionUID = -135188154738318638L;
 
+	JComboBox<Language> comboBox1;
+	JComboBox<Language> comboBox2;
+	
 	private JList<Course> courseList;
 	private JList<Lesson> lessonList;
 
@@ -89,10 +96,17 @@ public class CourseAdministrator extends JFrame {
 		List<Language> languageList = languageParser.getLanguageList();
 		Language[] languageArray = languageList.toArray(new Language[languageList.size()]);
 
-		JComboBox<Language> comboBox1 = new JComboBox<Language>(languageArray);
+		comboBox1 = new JComboBox<Language>(languageArray);
 		comboBox1.insertItemAt(new Language(" ", ""), 0);
 		comboBox1.setSelectedIndex(0);
 		comboBox1.setRenderer(new LanguageListCellRenderer());
+		comboBox1.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				if (arg0.getStateChange() == ItemEvent.SELECTED)
+					btnCrearCurso.setEnabled(false);
+			}
+		});
 		panel_1.add(comboBox1);
 
 		JPanel panel_2 = new JPanel();
@@ -103,10 +117,17 @@ public class CourseAdministrator extends JFrame {
 		JLabel lblIdiomaDeDestino = new JLabel("Idioma de destino");
 		panel_2.add(lblIdiomaDeDestino);
 
-		JComboBox<Language> comboBox2 = new JComboBox<Language>(languageArray);
+		comboBox2 = new JComboBox<Language>(languageArray);
 		comboBox2.insertItemAt(new Language(" ", ""), 0);
 		comboBox2.setSelectedIndex(0);
 		comboBox2.setRenderer(new LanguageListCellRenderer());
+		comboBox2.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				if (arg0.getStateChange() == ItemEvent.SELECTED)
+					btnCrearCurso.setEnabled(false);
+			}
+		});
 		panel_2.add(comboBox2);
 
 		JPanel panel_3 = new JPanel();
@@ -123,8 +144,7 @@ public class CourseAdministrator extends JFrame {
 					else
 						btnCrearCurso.setEnabled(false);
 				} else {
-					DefaultListModel model = new DefaultListModel();
-					model.clear();
+					DefaultListModel<Course> model = new DefaultListModel<Course>();
 					courseList.setModel(model);
 					btnCrearCurso.setEnabled(false);
 				}
@@ -133,6 +153,25 @@ public class CourseAdministrator extends JFrame {
 		panel_3.add(btnAplicarFiltro);
 
 		btnCrearCurso = new JButton("Crear curso");
+		btnCrearCurso.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ICourseQueries courseQueries = new CourseQueries();
+				String baseLanguage = ((Language)comboBox1.getSelectedItem()).getIsoCode();
+				String targetLanguage = ((Language)comboBox2.getSelectedItem()).getIsoCode();
+				Course course = courseQueries.insertCourseByBaseAndTargetLanguages(baseLanguage, targetLanguage);
+				if (course != null) {
+					// Course list is cleared and inserted course is shown
+					DefaultListModel<Course> model = new DefaultListModel<Course>();
+					model.addElement(course);
+					courseList.setModel(model);
+					btnCrearCurso.setEnabled(false);
+				} else {
+					// TODO Warn user about error
+				}
+				btnCrearCurso.setEnabled(false);
+			}
+		});
 		btnCrearCurso.setEnabled(false);
 		panel_3.add(btnCrearCurso);
 
@@ -154,7 +193,7 @@ public class CourseAdministrator extends JFrame {
 					if (courseList.getSelectedValue() != null) {
 						lessonList.setModel(LessonListModel.modelList(courseList.getSelectedValue().getId()));
 					} else {
-						DefaultListModel model = new DefaultListModel();
+						DefaultListModel<Lesson> model = new DefaultListModel<Lesson>();
 						model.clear();
 						lessonList.setModel(model);
 					}

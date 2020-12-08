@@ -12,7 +12,7 @@ public class CourseListModel {
 
 	public static DefaultListModel<Course> modelList(String baseLanguage, String targetLanguage) {
 		ICourseQueries courseQueries = new CourseQueries();
-		List<Course> courses = courseQueries.getCoursesByBaseAndTargetLanguage(baseLanguage, targetLanguage);
+		List<Course> courses = courseQueries.getCoursesByBaseAndTargetLanguages(baseLanguage, targetLanguage);
 		DefaultListModel<Course> model = new DefaultListModel<Course>();
 		for (Course course : courses)
 			model.addElement(course);
