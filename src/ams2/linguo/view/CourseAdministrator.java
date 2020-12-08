@@ -34,6 +34,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 import java.awt.FlowLayout;
 import javax.swing.JList;
@@ -71,6 +72,7 @@ public class CourseAdministrator extends JFrame {
 	 */
 	public CourseAdministrator() {
 		setTitle("Administrador de cursos");
+		setIconImage(new ImageIcon(getClass().getResource("/linguo-icon.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 700, 500);
 		setLocationRelativeTo(null);
@@ -213,7 +215,7 @@ public class CourseAdministrator extends JFrame {
 		lessonList.setCellRenderer(new LessonListCellRenderer());
 		panel_5.add(lessonList, BorderLayout.CENTER);
 
-		JButton btnAadirCategoria = new JButton("Añadir categoria");
+		JButton btnAadirCategoria = new JButton("A\u00f1adir categoria");
 		panel_5.add(btnAadirCategoria, BorderLayout.SOUTH);
 
 		JPanel panel_6 = new JPanel();
@@ -225,14 +227,14 @@ public class CourseAdministrator extends JFrame {
 		JList<?> list_2 = new JList<>();
 		panel_6.add(list_2, BorderLayout.CENTER);
 
-		JButton btnAadirNivel = new JButton("Añadir nivel");
+		JButton btnAadirNivel = new JButton("A\u00f1adir nivel");
 		panel_6.add(btnAadirNivel, BorderLayout.SOUTH);
 
 		JPanel lowerPanel = new JPanel();
 		contentPane.add(lowerPanel);
 		lowerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btnAadirPregunta = new JButton("AÑADIR PREGUNTA");
+		JButton btnAadirPregunta = new JButton("A\u00d1ADIR PREGUNTA");
 		lowerPanel.add(btnAadirPregunta);
 
 		JButton btnVisualizarPreguntas = new JButton("VISUALIZAR PREGUNTAS");
