@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -55,15 +56,16 @@ public class MainMenu extends JFrame {
 		menuBar.add(mnItems);
 		
 		JMenuItem mntmAdminCourses = new JMenuItem("Administrar Cursos");
-		mnItems.add(mntmAdminCourses);
 		mntmAdminCourses.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("HOLA");
 				dispose();
 				CourseAdministrator course = new CourseAdministrator();
 				course.setVisible(true);
 			}
 		});
-		
+		mnItems.add(mntmAdminCourses);
 		
 		JMenuItem mntmOtros = new JMenuItem("Otros");
 		mnItems.add(mntmOtros);

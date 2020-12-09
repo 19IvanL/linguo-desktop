@@ -80,6 +80,7 @@ public class CourseAdministrator extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 1, 0, 0));
+		setVisible(true);
 
 		JPanel headerPanel = new JPanel();
 		TitledBorder title1 = BorderFactory.createTitledBorder("Cursos existentes (filtrar por origen y/o destino)");
