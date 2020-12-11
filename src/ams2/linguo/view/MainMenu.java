@@ -60,7 +60,6 @@ public class MainMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("HOLA");
-				dispose();
 				CourseAdministrator course = new CourseAdministrator();
 				course.setVisible(true);
 			}

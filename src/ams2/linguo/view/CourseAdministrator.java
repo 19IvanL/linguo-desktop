@@ -18,9 +18,11 @@ import ams2.linguo.controller.LanguageParser;
 import ams2.linguo.controller.LessonListCellRenderer;
 import ams2.linguo.controller.LessonListModel;
 import ams2.linguo.interfaces.ICourseQueries;
+import ams2.linguo.interfaces.ILessonQueries;
 import ams2.linguo.model.Course;
 import ams2.linguo.model.Lesson;
 import ams2.linguo.queries.CourseQueries;
+import ams2.linguo.queries.LessonQueries;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -38,6 +40,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.FlowLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class CourseAdministrator extends JFrame {
 
@@ -218,6 +221,17 @@ public class CourseAdministrator extends JFrame {
 
 		JButton btnAadirCategoria = new JButton("A\u00f1adir categoria");
 		panel_5.add(btnAadirCategoria, BorderLayout.SOUTH);
+		
+		btnAadirCategoria.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ILessonQueries Queries = new LessonQueries();
+				String seleccion = JOptionPane.showInputDialog(CourseAdministrator.this,"Nombre de la nueva categoria",JOptionPane.QUESTION_MESSAGE);
+				//Lesson lesson = Queries.insertLesonByCourseAndLessonCategory(courseList.getSelectedValue().getId(), //?);
+			}
+			
+		});
 
 		JPanel panel_6 = new JPanel();
 		middlePanel.add(panel_6);
