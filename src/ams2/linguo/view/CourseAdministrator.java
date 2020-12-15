@@ -15,15 +15,14 @@ import ams2.linguo.controller.CourseListModel;
 import ams2.linguo.controller.Language;
 import ams2.linguo.controller.LanguageListCellRenderer;
 import ams2.linguo.controller.LanguageParser;
-import ams2.linguo.controller.LessonListCellRenderer;
-import ams2.linguo.controller.LessonListModel;
+import ams2.linguo.controller.LessonCategoryListCellRenderer;
+import ams2.linguo.controller.LessonCategoryListModel;
 import ams2.linguo.interfaces.ICourseQueries;
-import ams2.linguo.interfaces.ILessonQueries;
+import ams2.linguo.interfaces.ILessonCategoryQueries;
 import ams2.linguo.model.Course;
-import ams2.linguo.model.Lesson;
+import ams2.linguo.model.LessonCategory;
 import ams2.linguo.queries.CourseQueries;
-import ams2.linguo.queries.LessonQueries;
-
+import ams2.linguo.queries.LessonCategoryQueries;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -50,7 +49,7 @@ public class CourseAdministrator extends JFrame {
 	JComboBox<Language> comboBox2;
 	
 	private JList<Course> courseList;
-	private JList<Lesson> lessonList;
+	private JList<LessonCategory> lessonCategoryList;
 
 	private JButton btnCrearCurso;
 
@@ -197,11 +196,11 @@ public class CourseAdministrator extends JFrame {
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
 					if (courseList.getSelectedValue() != null) {
-						lessonList.setModel(LessonListModel.modelList(courseList.getSelectedValue().getId()));
+						lessonCategoryList.setModel(LessonCategoryListModel.modelList(courseList.getSelectedValue().getId()));
 					} else {
-						DefaultListModel<Lesson> model = new DefaultListModel<Lesson>();
+						DefaultListModel<LessonCategory> model = new DefaultListModel<LessonCategory>();
 						model.clear();
-						lessonList.setModel(model);
+						lessonCategoryList.setModel(model);
 					}
 				}
 			}
@@ -215,9 +214,9 @@ public class CourseAdministrator extends JFrame {
 		panel_5.setBorder(title3);
 		panel_5.setLayout(new BorderLayout(0, 0));
 
-		lessonList = new JList<Lesson>();
-		lessonList.setCellRenderer(new LessonListCellRenderer());
-		panel_5.add(lessonList, BorderLayout.CENTER);
+		lessonCategoryList = new JList<LessonCategory>();
+		lessonCategoryList.setCellRenderer(new LessonCategoryListCellRenderer());
+		panel_5.add(lessonCategoryList, BorderLayout.CENTER);
 
 		JButton btnAadirCategoria = new JButton("A\u00f1adir categoria");
 		panel_5.add(btnAadirCategoria, BorderLayout.SOUTH);
@@ -226,9 +225,19 @@ public class CourseAdministrator extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ILessonQueries Queries = new LessonQueries();
-				String seleccion = JOptionPane.showInputDialog(CourseAdministrator.this,"Nombre de la nueva categoria",JOptionPane.QUESTION_MESSAGE);
-				//Lesson lesson = Queries.insertLesonByCourseAndLessonCategory(courseList.getSelectedValue().getId(), //?);
+				ILessonCategoryQueries lessonCategoryQueries = new LessonCategoryQueries();
+				String seleccion = JOptionPane.showInputDialog(CourseAdministrator.this, "Nombre de la nueva categoria", JOptionPane.QUESTION_MESSAGE);
+				if(seleccion != null) {
+					LessonCategory lessonCategory = lessonCategoryQueries.insertLessonCategoryByTitle(seleccion, courseList.getSelectedValue());
+					if (lessonCategory != null) {
+						// Course list is cleared and inserted course is shown
+						DefaultListModel<LessonCategory> model = LessonCategoryListModel.modelList(courseList.getSelectedValue().getId());
+						lessonCategoryList.setModel(model);
+					} else {
+						// TODO Warn user about error
+					}
+				}
+				
 			}
 			
 		});
