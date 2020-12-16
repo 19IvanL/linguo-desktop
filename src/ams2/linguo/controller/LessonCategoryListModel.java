@@ -10,7 +10,7 @@ import ams2.linguo.queries.LessonCategoryQueries;
 
 public class LessonCategoryListModel {
 
-	public static DefaultListModel<LessonCategory> modelList(Long courseId) {
+	public static DefaultListModel<LessonCategory> modelList(long courseId) {
 		ILessonCategoryQueries lessonCategoryQueries = new LessonCategoryQueries();
 		List<LessonCategory> lessonCategories = lessonCategoryQueries.getLessonsCategoryByCourseId(courseId);
 		DefaultListModel<LessonCategory> model = new DefaultListModel<LessonCategory>();

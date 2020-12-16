@@ -17,6 +17,7 @@ import ams2.linguo.controller.LanguageListCellRenderer;
 import ams2.linguo.controller.LanguageParser;
 import ams2.linguo.controller.LessonCategoryListCellRenderer;
 import ams2.linguo.controller.LessonCategoryListModel;
+import ams2.linguo.controller.LessonListCellRenderer;
 import ams2.linguo.controller.LessonListModel;
 import ams2.linguo.interfaces.ICourseQueries;
 import ams2.linguo.interfaces.ILessonCategoryQueries;
@@ -60,6 +61,9 @@ public class CourseAdministrator extends JFrame {
 	private JButton btnCrearCurso;
 	private JButton btnAadirNivel;
 	private JButton btnAadirCategoria;
+	private JButton btnAplicarFiltro;
+	private JButton btnAadirPregunta;
+	private JButton btnVisualizarPreguntas;
 
 	/**
 	 * Launch the application.
@@ -146,7 +150,7 @@ public class CourseAdministrator extends JFrame {
 		JPanel panel_3 = new JPanel();
 		headerPanel.add(panel_3);
 
-		JButton btnAplicarFiltro = new JButton("Aplicar filtro");
+		btnAplicarFiltro = new JButton("Aplicar filtro");
 		btnAplicarFiltro.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -230,9 +234,11 @@ public class CourseAdministrator extends JFrame {
 				btnAadirNivel.setEnabled(true);
 				if (!arg0.getValueIsAdjusting()) {
 					if (lessonCategoryList.getSelectedValue() != null) {
-						//lessonCategoryList.setModel(LessonCategoryListModel.modelList(courseList.getSelectedValue().getId()));
+						lessonList.setModel(LessonListModel.modelList(lessonCategoryList.getSelectedValue().getId()));
 					} else {
-						
+						DefaultListModel<Lesson> model = new DefaultListModel<Lesson>();
+						model.clear();
+						lessonList.setModel(model);
 					}
 				}
 			}
@@ -271,7 +277,9 @@ public class CourseAdministrator extends JFrame {
 		panel_6.setBorder(title4);
 		panel_6.setLayout(new BorderLayout(0, 0));
 
-		JList<Lesson> lessonList = new JList<>();
+		lessonList = new JList<Lesson>();
+		
+		lessonList.setCellRenderer(new LessonListCellRenderer());
 		panel_6.add(lessonList, BorderLayout.CENTER);
 
 		btnAadirNivel = new JButton("A\u00f1adir nivel");
@@ -283,12 +291,11 @@ public class CourseAdministrator extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ILessonQueries lessonQueries = new LessonQueries();
-				String selection = JOptionPane.showInputDialog(CourseAdministrator.this, "Nombre de la nueva categoria", JOptionPane.QUESTION_MESSAGE);
+				String selection = JOptionPane.showInputDialog(CourseAdministrator.this, "Nombre de la nueva lecci\u00f3n", JOptionPane.QUESTION_MESSAGE);
 				if(selection != null) {
 					Lesson lesson = lessonQueries.insertLesonByNameAndLessonCategory(selection, lessonCategoryList.getSelectedValue());
 					if (lesson != null) {
-						// Course list is cleared and inserted course is shown
-						DefaultListModel<Lesson> model = LessonListModel.modelList(courseList.getSelectedValue().getId());
+						DefaultListModel<Lesson> model = LessonListModel.modelList(lessonCategoryList.getSelectedValue().getId());
 						lessonList.setModel(model);
 					} else {
 						// TODO Warn user about error
@@ -299,15 +306,16 @@ public class CourseAdministrator extends JFrame {
 			
 		});
 		
+		
 
 		JPanel lowerPanel = new JPanel();
 		contentPane.add(lowerPanel);
 		lowerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btnAadirPregunta = new JButton("A\u00d1ADIR PREGUNTA");
+		btnAadirPregunta = new JButton("A\u00d1ADIR PREGUNTA");
 		lowerPanel.add(btnAadirPregunta);
 
-		JButton btnVisualizarPreguntas = new JButton("VISUALIZAR PREGUNTAS");
+		btnVisualizarPreguntas = new JButton("VISUALIZAR PREGUNTAS");
 		lowerPanel.add(btnVisualizarPreguntas);
 	}
 
