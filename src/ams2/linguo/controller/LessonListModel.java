@@ -6,7 +6,6 @@ import javax.swing.DefaultListModel;
 
 import ams2.linguo.interfaces.ILessonQueries;
 import ams2.linguo.model.Lesson;
-import ams2.linguo.model.LessonCategory;
 import ams2.linguo.queries.LessonQueries;
 
 public class LessonListModel {

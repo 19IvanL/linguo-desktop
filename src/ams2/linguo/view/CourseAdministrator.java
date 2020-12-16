@@ -59,8 +59,8 @@ public class CourseAdministrator extends JFrame {
 	private JList<Lesson> lessonList;
 
 	private JButton btnCrearCurso;
-	private JButton btnAadirNivel;
 	private JButton btnAadirCategoria;
+	private JButton btnAadirNivel;
 	private JButton btnAplicarFiltro;
 	private JButton btnAadirPregunta;
 	private JButton btnVisualizarPreguntas;
@@ -206,14 +206,15 @@ public class CourseAdministrator extends JFrame {
 		courseList.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				btnAadirCategoria.setEnabled(true);
 				if (!arg0.getValueIsAdjusting()) {
 					if (courseList.getSelectedValue() != null) {
 						lessonCategoryList.setModel(LessonCategoryListModel.modelList(courseList.getSelectedValue().getId()));
+						btnAadirCategoria.setEnabled(true);
 					} else {
 						DefaultListModel<LessonCategory> model = new DefaultListModel<LessonCategory>();
 						model.clear();
 						lessonCategoryList.setModel(model);
+						btnAadirCategoria.setEnabled(false);
 					}
 				}
 			}
@@ -231,14 +232,15 @@ public class CourseAdministrator extends JFrame {
 		lessonCategoryList.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				btnAadirNivel.setEnabled(true);
 				if (!arg0.getValueIsAdjusting()) {
 					if (lessonCategoryList.getSelectedValue() != null) {
 						lessonList.setModel(LessonListModel.modelList(lessonCategoryList.getSelectedValue().getId()));
+						btnAadirNivel.setEnabled(true);
 					} else {
 						DefaultListModel<Lesson> model = new DefaultListModel<Lesson>();
 						model.clear();
 						lessonList.setModel(model);
+						btnAadirNivel.setEnabled(false);
 					}
 				}
 			}
@@ -247,16 +249,13 @@ public class CourseAdministrator extends JFrame {
 		panel_5.add(lessonCategoryList, BorderLayout.CENTER);
 
 		btnAadirCategoria = new JButton("A\u00f1adir categoria");
-		panel_5.add(btnAadirCategoria, BorderLayout.SOUTH);
 		btnAadirCategoria.setEnabled(false);
-		
 		btnAadirCategoria.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ILessonCategoryQueries lessonCategoryQueries = new LessonCategoryQueries();
 				String selection = JOptionPane.showInputDialog(CourseAdministrator.this, "Nombre de la nueva categoria", JOptionPane.QUESTION_MESSAGE);
-				if(selection != null) {
+				if (selection != null) {
 					LessonCategory lessonCategory = lessonCategoryQueries.insertLessonCategoryByTitle(selection, courseList.getSelectedValue());
 					if (lessonCategory != null) {
 						// Course list is cleared and inserted course is shown
@@ -266,10 +265,9 @@ public class CourseAdministrator extends JFrame {
 						// TODO Warn user about error
 					}
 				}
-				
 			}
-			
 		});
+		panel_5.add(btnAadirCategoria, BorderLayout.SOUTH);
 
 		JPanel panel_6 = new JPanel();
 		middlePanel.add(panel_6);
@@ -278,16 +276,26 @@ public class CourseAdministrator extends JFrame {
 		panel_6.setLayout(new BorderLayout(0, 0));
 
 		lessonList = new JList<Lesson>();
-		
+		lessonList.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				if (!arg0.getValueIsAdjusting()) {
+					if (lessonList.getSelectedValue() != null) {
+						btnAadirPregunta.setEnabled(true);
+						btnVisualizarPreguntas.setEnabled(true);
+					} else {
+						btnAadirPregunta.setEnabled(false);
+						btnVisualizarPreguntas.setEnabled(false);
+					}
+				}
+			}
+		});
 		lessonList.setCellRenderer(new LessonListCellRenderer());
 		panel_6.add(lessonList, BorderLayout.CENTER);
 
 		btnAadirNivel = new JButton("A\u00f1adir nivel");
-		panel_6.add(btnAadirNivel, BorderLayout.SOUTH);
 		btnAadirNivel.setEnabled(false);
-		
 		btnAadirNivel.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ILessonQueries lessonQueries = new LessonQueries();
@@ -301,21 +309,27 @@ public class CourseAdministrator extends JFrame {
 						// TODO Warn user about error
 					}
 				}
-				
 			}
-			
 		});
-		
-		
+		panel_6.add(btnAadirNivel, BorderLayout.SOUTH);
 
 		JPanel lowerPanel = new JPanel();
 		contentPane.add(lowerPanel);
 		lowerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		btnAadirPregunta = new JButton("A\u00d1ADIR PREGUNTA");
+		btnAadirPregunta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				NewExercise newExercise = new NewExercise(courseList.getSelectedValue().getBaseLanguage(), courseList.getSelectedValue().getTargetLanguage(), lessonCategoryList.getSelectedValue().getTitle(), lessonList.getSelectedValue().getName());
+				newExercise.setVisible(true);
+			}
+		});
+		btnAadirPregunta.setEnabled(false);
 		lowerPanel.add(btnAadirPregunta);
 
 		btnVisualizarPreguntas = new JButton("VISUALIZAR PREGUNTAS");
+		btnVisualizarPreguntas.setEnabled(false);
 		lowerPanel.add(btnVisualizarPreguntas);
 	}
 
