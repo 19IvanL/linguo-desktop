@@ -27,7 +27,9 @@ This project is structured as an Eclipse Java project, and ideally, it should be
 
 Once it's imported into your IDE, make sure you have the above mentioned **required dependencies** added to your build path.
 
-If it doesn't throw any error (and it shouldn't), you are ready to go.
+On a side note, always use the same linguo-lib version around this app's version, or else errors and inconsistencies could occur.
+
+If the compilation doesn't throw any error during or after its process (and it shouldn't if you followed the steps carefully), you are ready to go.
 
 
 ## Credits
