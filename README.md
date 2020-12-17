@@ -34,4 +34,4 @@ If the compilation doesn't throw any error during or after its process (and it s
 
 ## Credits
 
-linguo-desktop it's mainly developed by [19IvanL](https://github.com/19IvanL) and [OscarD01](https://github.com/OscarD01) as a high school project. 
+linguo-desktop is mainly developed by [19IvanL](https://github.com/19IvanL) and [OscarD01](https://github.com/OscarD01) as a high school project. 
