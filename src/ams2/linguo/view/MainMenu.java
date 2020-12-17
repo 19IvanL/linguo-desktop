@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,13 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 public class MainMenu extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6480680643448385087L;
 
 	private JPanel contentPane;
@@ -59,9 +54,8 @@ public class MainMenu extends JFrame {
 		mntmAdminCourses.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("HOLA");
-				CourseAdministrator course = new CourseAdministrator();
-				course.setVisible(true);
+				CourseAdministrator courseAdministrator = new CourseAdministrator();
+				courseAdministrator.setVisible(true);
 			}
 		});
 		mnItems.add(mntmAdminCourses);
