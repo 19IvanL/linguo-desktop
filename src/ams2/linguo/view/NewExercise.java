@@ -3,6 +3,8 @@ package ams2.linguo.view;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.EmptyBorder;
+
+import ams2.linguo.interfaces.IExerciseTypeQueries;
+import ams2.linguo.model.ExerciseType;
+import ams2.linguo.model.Lesson;
+import ams2.linguo.queries.ExerciseTypeQueries;
+
 import javax.swing.SwingConstants;
 
 public class NewExercise extends JFrame {
@@ -21,7 +29,7 @@ public class NewExercise extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewExercise(String baseLanguage, String targetLanguage, String lessonCategoryTitle, String lessonName) {
+	public NewExercise(String baseLanguage, String targetLanguage, String lessonCategoryTitle, Lesson lesson) {
 		setBounds(0, 0, 885, 437);
 		setLocationRelativeTo(null);
 		
@@ -74,7 +82,7 @@ public class NewExercise extends JFrame {
 		leftPanel.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 1, 0, 0));
 		
-		JLabel lblLesson = new JLabel("Lección: " + lessonName);
+		JLabel lblLesson = new JLabel("Lecci\u00f3n: " + lesson.getName());
 		lblLesson.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblLesson);
 		lblLesson.setFont(font);
@@ -83,16 +91,16 @@ public class NewExercise extends JFrame {
 		splitPane.setRightComponent(rightPanel);
 		rightPanel.setLayout(new GridLayout(7, 1, 0, 0));
 		
-		JButton btnTraduccinAbierta = new JButton("Traducción abierta");
+		JButton btnTraduccinAbierta = new JButton("Traducci\u00f3n abierta");
 		rightPanel.add(btnTraduccinAbierta);
 		
-		JButton btnTraduccinDeOrdenacin = new JButton("Traducción de ordenación");
+		JButton btnTraduccinDeOrdenacin = new JButton("Traducci\u00f3n de ordenaci\u00f3n");
 		rightPanel.add(btnTraduccinDeOrdenacin);
 		
-		JButton btnTraduccinAbiertaen = new JButton("Traducción abierta (en listening)");
+		JButton btnTraduccinAbiertaen = new JButton("Traducci\u00f3n abierta (en listening)");
 		rightPanel.add(btnTraduccinAbiertaen);
 		
-		JButton btnTraduccionDeOrdenacin = new JButton("Traduccion de ordenación (en listening)");
+		JButton btnTraduccionDeOrdenacin = new JButton("Traducci\u00f3n de ordenaci\u00f3n (en listening)");
 		rightPanel.add(btnTraduccionDeOrdenacin);
 		
 		JButton btnEmparejamientoDePalabras = new JButton("Emparejamiento de palabras");
@@ -102,6 +110,15 @@ public class NewExercise extends JFrame {
 		rightPanel.add(btnRellenarLosHuecos);
 		
 		JButton btnTipoTest = new JButton("Tipo test");
+		btnTipoTest.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				IExerciseTypeQueries exerciseTypeQueries = new ExerciseTypeQueries();
+				ExerciseType exerciseType = exerciseTypeQueries.getExerciseTypeById(1);
+				NewExerciseQuiz newExerciseQuiz = new NewExerciseQuiz(lesson, exerciseType);
+				newExerciseQuiz.setVisible(true);
+			}
+		});
 		rightPanel.add(btnTipoTest);
 	}
 
