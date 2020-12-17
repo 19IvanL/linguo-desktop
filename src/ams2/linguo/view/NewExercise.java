@@ -82,7 +82,7 @@ public class NewExercise extends JFrame {
 		leftPanel.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 1, 0, 0));
 		
-		JLabel lblLesson = new JLabel("Lección: " + lesson.getName());
+		JLabel lblLesson = new JLabel("Lecci\u00f3n: " + lesson.getName());
 		lblLesson.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblLesson);
 		lblLesson.setFont(font);
@@ -91,16 +91,16 @@ public class NewExercise extends JFrame {
 		splitPane.setRightComponent(rightPanel);
 		rightPanel.setLayout(new GridLayout(7, 1, 0, 0));
 		
-		JButton btnTraduccinAbierta = new JButton("Traducción abierta");
+		JButton btnTraduccinAbierta = new JButton("Traducci\u00f3n abierta");
 		rightPanel.add(btnTraduccinAbierta);
 		
-		JButton btnTraduccinDeOrdenacin = new JButton("Traducción de ordenación");
+		JButton btnTraduccinDeOrdenacin = new JButton("Traducci\u00f3n de ordenaci\u00f3n");
 		rightPanel.add(btnTraduccinDeOrdenacin);
 		
-		JButton btnTraduccinAbiertaen = new JButton("Traducción abierta (en listening)");
+		JButton btnTraduccinAbiertaen = new JButton("Traducci\u00f3n abierta (en listening)");
 		rightPanel.add(btnTraduccinAbiertaen);
 		
-		JButton btnTraduccionDeOrdenacin = new JButton("Traduccion de ordenación (en listening)");
+		JButton btnTraduccionDeOrdenacin = new JButton("Traducci\u00f3n de ordenaci\u00f3n (en listening)");
 		rightPanel.add(btnTraduccionDeOrdenacin);
 		
 		JButton btnEmparejamientoDePalabras = new JButton("Emparejamiento de palabras");
