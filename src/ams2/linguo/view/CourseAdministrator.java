@@ -321,7 +321,7 @@ public class CourseAdministrator extends JFrame {
 		btnAadirPregunta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				NewExercise newExercise = new NewExercise(courseList.getSelectedValue().getBaseLanguage(), courseList.getSelectedValue().getTargetLanguage(), lessonCategoryList.getSelectedValue().getTitle(), lessonList.getSelectedValue().getName());
+				NewExercise newExercise = new NewExercise(courseList.getSelectedValue().getBaseLanguage(), courseList.getSelectedValue().getTargetLanguage(), lessonCategoryList.getSelectedValue().getTitle(), lessonList.getSelectedValue());
 				newExercise.setVisible(true);
 			}
 		});
