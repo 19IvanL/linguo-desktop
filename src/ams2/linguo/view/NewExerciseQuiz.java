@@ -62,7 +62,7 @@ public class NewExerciseQuiz extends JFrame {
 		centerPanel.add(panel_1);
 		panel_1.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lblOpcinCorrecta = new JLabel("Opción correcta:");
+		JLabel lblOpcinCorrecta = new JLabel("Opci\u00f3n correcta:");
 		panel_1.add(lblOpcinCorrecta);
 		
 		textField_1 = new JTextField();
@@ -73,7 +73,7 @@ public class NewExerciseQuiz extends JFrame {
 		centerPanel.add(panel_2);
 		panel_2.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lblOpcinIncorrecta = new JLabel("Opción incorrecta 1:");
+		JLabel lblOpcinIncorrecta = new JLabel("Opci\u00f3n incorrecta 1:");
 		panel_2.add(lblOpcinIncorrecta);
 		
 		textField_2 = new JTextField();
@@ -84,7 +84,7 @@ public class NewExerciseQuiz extends JFrame {
 		centerPanel.add(panel_3);
 		panel_3.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lblOpcinIncorrecta_1 = new JLabel("Opción incorrecta 2:");
+		JLabel lblOpcinIncorrecta_1 = new JLabel("Opci\u00f3n incorrecta 2:");
 		panel_3.add(lblOpcinIncorrecta_1);
 		
 		textField_3 = new JTextField();
